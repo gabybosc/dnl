@@ -8,7 +8,7 @@ abre un archivo con 720000 palabras en inglés. Luego, crea una string con 15000
 with open('words.txt', 'r') as f:
     n = f.readlines()
     string = []
-    for i in range(15000):
+    for i in range(300000):
         numero_random = random.randint(0, len(n))
         string.append(n[numero_random].rstrip('\n'))
 
