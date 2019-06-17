@@ -21,11 +21,15 @@ for english in ['Pride_and_prejudice.txt', 'A_tale_of_two_cities.txt', 'Alice_in
             palabras.append(_.translate(str.maketrans('', '', string.punctuation)))
         for _ in palabras:
             palabras2.append(_.lower())
+        print(english)
 
 ranking = Counter(palabras2)
 ranking_ordenado = np.array([(k) for k,l in sorted([(j,i) for i,j in ranking.items()], reverse=True)])
 ranking_normalizado = ranking_ordenado/np.linalg.norm(ranking_ordenado)
 ranking_ordenado_con_palabras = [(k, l) for k,l in sorted([(j,i) for i,j in ranking.items()], reverse=True)]
+with open(f'ranking_ingles.csv', 'w') as fp:
+    fp.write('\n'.join('{},{}'.format(x[0],x[1]) for x in ranking_ordenado_con_palabras[0:10]))
+
 
 lista_palabras = np.array([i+1 for i in range(len(ranking_normalizado))])
 a,b = np.polyfit(np.log(lista_palabras[15:1500]), np.log(ranking_normalizado[15:1500]), 1)
@@ -65,6 +69,9 @@ ranking = Counter(palabras2)
 ranking_ordenado = np.array([k for k,l in sorted([(j,i) for i,j in ranking.items()], reverse=True)])
 ranking_normalizado = ranking_ordenado/np.linalg.norm(ranking_ordenado)
 ranking_ordenado_con_palabras = [(k, l) for k,l in sorted([(j,i) for i,j in ranking.items()], reverse=True)]
+
+with open(f'ranking_espanol.csv', 'w') as fp:
+    fp.write('\n'.join('{},{}'.format(x[0],x[1]) for x in ranking_ordenado_con_palabras[0:10]))
 
 lista_palabras = np.array([i+1 for i in range(len(ranking_normalizado))])
 a,b = np.polyfit(np.log(lista_palabras[15:1500]), np.log(ranking_normalizado[15:1500]), 1)
